@@ -7,7 +7,7 @@ import { Form } from '../components/Form';
 import { Input } from '../components/Input';
 import { SubmitButton } from '../components/SubmitButton';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const SignUpPage = () => {
 	const [disabled, setDisabled] = useState(false);
@@ -92,7 +92,7 @@ const SignUpPage = () => {
 					<SubmitButton>Cadastrar</SubmitButton>
 				</Form>
 				<p>
-					Já possui uma conta? <a href="#">Faça login!</a>
+					Já possui uma conta? <Link to="/login">Faça login!</Link>
 				</p>
 			</main>
 		</AuthPage>
