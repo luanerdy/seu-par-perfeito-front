@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { SignUpPage } from './pages/SignUpPage';
 import { LogInPage } from './pages/LogInPage';
-import Store from './components/Store/Store';
+import Store from './components/Store/Store.js';
 import Resetcss from './Resetcss.js';
 
 function App() {
