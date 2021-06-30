@@ -10,7 +10,7 @@ export default function Store() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        const request = axios.get('http://localhost:4000/products');
+        const request = axios.get(`${process.env.REACT_APP_HOST}/products`);
         request.then(r => {
             setProducts(r.data);
         });
