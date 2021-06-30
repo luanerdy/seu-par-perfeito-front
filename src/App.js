@@ -1,8 +1,15 @@
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Store from './Components/Store/Store.js';
+import Resetcss from './Resetcss.js';
+
 function App() {
   return (
-    <div className="App">
-      App
-    </div>
+    <BrowserRouter>
+      <Resetcss />
+      <Switch>
+        <Route path="/store" component={Store}/>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
