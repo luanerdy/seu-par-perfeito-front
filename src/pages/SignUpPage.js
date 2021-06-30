@@ -33,7 +33,7 @@ const SignUpPage = () => {
 		}
 
 		axios
-			.post('http://localhost:4000/auth/signup', user)
+			.post(`${process.env.REACT_APP_HOST}/auth/signup`, user)
 			.then((res) => {
 				history.push("/login");
 			})
