@@ -2,8 +2,20 @@ import banner from '../assets/images/banner-welcome.svg';
 import logo from '../assets/images/logo-icon.svg';
 import { IoPersonSharp, IoCartSharp } from 'react-icons/io5';
 import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import Product from './Product.js';
+import axios from 'axios';
 
 export default function Store() {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const request = axios.get('http://localhost:4000/products');
+        request.then(r => {
+            setProducts(r.data);
+        });
+    }, []);
+
     return (
         <StoreBody>
             <TopBar>
@@ -16,6 +28,16 @@ export default function Store() {
                 </div>
             </TopBar>
             <Banner src={banner} alt="banner"/>
+            <ProductsGrid>
+                {products.map(item => {
+                    return <Product
+                                key = {item.id}
+                                name = {item.name} 
+                                value = {item.value} 
+                                description = {item.description} 
+                                image = {item.image}/>
+                })}
+            </ProductsGrid>
         </StoreBody>
     );
 }
@@ -62,4 +84,12 @@ const Logo = styled.img`
 const Banner = styled.img`
     width: 90%;
     margin-top: 50px;
+`;
+
+const ProductsGrid = styled.div`
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 10px;
 `;
