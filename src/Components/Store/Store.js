@@ -1,5 +1,5 @@
-import banner from '../assets/images/banner-welcome.svg';
-import logo from '../assets/images/logo-icon.svg';
+import banner from '../../assets/images/banner-welcome.svg';
+import logo from '../../assets/images/logo-icon.svg';
 import { IoPersonSharp, IoCartSharp } from 'react-icons/io5';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
@@ -14,6 +14,9 @@ export default function Store() {
         request.then(r => {
             setProducts(r.data);
         });
+        request.catch(() => {
+            alert('algo deu errado.');
+        })
     }, []);
 
     return (

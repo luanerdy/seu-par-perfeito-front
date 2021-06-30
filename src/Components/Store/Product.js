@@ -7,8 +7,8 @@ export default function Product({ name, value, description, image }) {
             <img src={image} alt="product" />
             <Bar>
                 <Info>
-                    <Name>Tênis muito legal</Name>
-                    <Value>R$ {(15000/100).toFixed(2).replace('.',',')}</Value>
+                    <Name>{name}</Name>
+                    <Value>R$ {(value/100).toFixed(2).replace('.',',')}</Value>
                 </Info>
                 <CartBtn>
                     <TiShoppingCart className="cart" />

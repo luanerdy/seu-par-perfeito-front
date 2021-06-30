@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Store from './Components/Store.js';
+import Store from './Components/Store/Store.js';
 import Resetcss from './Resetcss.js';
 
 function App() {
