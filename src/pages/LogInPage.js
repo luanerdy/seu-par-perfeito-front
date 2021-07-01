@@ -5,12 +5,38 @@ import { AuthPage } from '../styles/auth';
 import { Form } from '../components/Form';
 import { Input } from '../components/Input';
 import { SubmitButton } from '../components/SubmitButton';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import axios from 'axios';
+import { Link, useHistory } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContext';
 
 const LogInPage = () => {
 	const [disabled, setDisabled] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const history = useHistory();
+	const { setUser } = useContext(UserContext);
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		setDisabled(true);
+
+		const user = {
+			email,
+			password
+		}
+
+		axios
+			.post(`${process.env.REACT_APP_HOST}/auth/login`, user)
+			.then((res) => {
+				setUser(res.data);
+				history.push("/store");
+			})
+			.catch((err) => {
+				alert('Erro! Tente novamente!');
+				setDisabled(false);
+			});
+	};
 
 	return (
 		<AuthPage>
@@ -26,7 +52,7 @@ const LogInPage = () => {
 			</aside>
 			<main>
 				<img src={logoHorizontal} alt="Logo" />
-				<Form disabled={disabled}>
+				<Form disabled={disabled} onSubmit={handleSubmit}>
 					<Input
                         placeholder="Digite seu email"
 						required
@@ -43,7 +69,7 @@ const LogInPage = () => {
 					/>
                     <SubmitButton>Entrar</SubmitButton>
 				</Form>
-                <p>Primeira vez no site? <a href="#">Cadastre-se!</a></p>
+                <p>Primeira vez no site? <Link to="/signup">Cadastre-se!</Link></p>
 			</main>
 		</AuthPage>
 	);
