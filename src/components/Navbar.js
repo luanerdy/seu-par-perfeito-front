@@ -3,14 +3,28 @@ import logo from '../assets/images/logo-icon.svg';
 import { IoPersonSharp, IoCartSharp, IoLogOut } from 'react-icons/io5';
 import { UserContext } from '../contexts/UserContext';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Navbar() {
-    const { user } = useContext(UserContext);
-    const { name } = user;
+    const history = useHistory();
+    const { user, setUser } = useContext(UserContext);
+    const { name, token } = user;
 
     function logout() {
-        alert('logout a ser implementado')
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+        const request = axios.post(`${process.env.REACT_APP_HOST}/auth/logout`, {}, config);
+        request.then(() => {
+            history.push("/");
+            setUser({ name: '', userId: '', token: '' });
+        });
+        request.catch(() => {
+            alert("algo deu errado");
+        })
     }
 
     return (
