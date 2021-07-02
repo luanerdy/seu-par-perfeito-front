@@ -30,32 +30,29 @@ const Card = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 150px;
-    height: 200px;
+    width: 300px;
+    height: 400px;
     margin-bottom: 10px;
-    margin-left: 40px;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0,0,0,0.3);
-    :first-child {
-        margin-left: 0;
-    }
+
     img {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         box-shadow: 0 1px rgba(0,0,0,0.3);
-        height: 150px;
+        height: 300px;
         width: 100%;
         object-fit: cover;
     }
 `;
 
 const Bar = styled.div`
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    padding-left: 3px;
+	width: 100%;
+	height: 100px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 10px;
+	padding-left: 3px;
 `;
 
 const Info = styled.div`
@@ -66,24 +63,25 @@ const Info = styled.div`
 `;
 
 const Name = styled.div`
-    margin-top: 3px;
-    color: black;
-    font-size: 12px;
+	margin-top: 3px;
+	color: black;
+	font-size: 21px;
 `;
 
 const Value = styled.div`
-    font-size: 19px;
-    color: #281453;
+	font-weight: 700;
+	font-size: 25px;
+	color: #281453;
 `;
 
 const CartBtn = styled.button`
-    background-color: #281453;
-    width: 45px;
-    height: 100%;
-    border-bottom-right-radius: 10px;
-    cursor: pointer;
-    .cart {
-        color: #fff;
-        font-size: 25px;
-    }
+	background-color: #281453;
+	width: 100px;
+	height: 100%;
+	border-bottom-right-radius: 10px;
+	cursor: pointer;
+	.cart {
+		color: #fff;
+		font-size: 60px;
+	}
 `;

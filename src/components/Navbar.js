@@ -32,10 +32,10 @@ export default function Navbar() {
             <div>
                 <Link to={"/"}><Logo src={logo} alt="logo"/></Link>
                 <MenuIcons>
-                    {name === '' ? '' : <p>Olá, {name}</p>}
-                    <Link to={name === '' ? "/login" : "/"}><IoPersonSharp className="icon" /></Link>
+                    {!user?.name ? null : <p>Olá, {user?.name}</p>}
+                    <Link to={!user?.name ? "/login" : "/"}><IoPersonSharp className="icon" /></Link>
                     <Link to="/cart"><IoCartSharp className="icon" /></Link>
-                    {name === '' ? '' : <IoLogOut className="icon" onClick={logout}/>}
+                    {!user?.name ? '' : <IoLogOut className="icon" onClick={logout}/>}
                 </MenuIcons>
             </div>
         </TopBar>

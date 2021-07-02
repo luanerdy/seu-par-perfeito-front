@@ -45,7 +45,7 @@ export default function CartPage() {
     }
 
     function checkout() {
-        alert('checkout a ser implementado');
+        history.push('/checkout');
     }
 
     return (
