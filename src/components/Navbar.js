@@ -3,14 +3,27 @@ import logo from '../assets/images/logo-icon.svg';
 import { IoPersonSharp, IoCartSharp, IoLogOut } from 'react-icons/io5';
 import { UserContext } from '../contexts/UserContext';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Navbar() {
-    const { user } = useContext(UserContext);
-    const { name } = user;
+    const { user, setUser } = useContext(UserContext);
+    const history = useHistory();
 
     function logout() {
-        alert('logout a ser implementado')
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            }
+        }
+        axios.post(`${process.env.REACT_APP_HOST}/auth/logout`, [], config)
+        .then(res => {
+            history.push('/');
+            setUser(undefined);
+            alert('Deslogado com sucesso!');
+        }).catch(err => {
+            alert('Algo deu errado! Tente novamente!');
+        });
     }
 
     return (
@@ -18,10 +31,10 @@ export default function Navbar() {
             <div>
                 <Link to={"/"}><Logo src={logo} alt="logo"/></Link>
                 <MenuIcons>
-                    {name === '' ? '' : <p>Olá, {name}</p>}
-                    <Link to={name === '' ? "/login" : "/"}><IoPersonSharp className="icon" /></Link>
+                    {!user ? null : <p>Olá, {user?.name}</p>}
+                    <Link to={!user ? "/login" : "/"}><IoPersonSharp className="icon" /></Link>
                     <Link to="/cart"><IoCartSharp className="icon" /></Link>
-                    {name === '' ? '' : <IoLogOut className="icon" onClick={logout}/>}
+                    {!user ? '' : <IoLogOut className="icon" onClick={logout}/>}
                 </MenuIcons>
             </div>
         </TopBar>
