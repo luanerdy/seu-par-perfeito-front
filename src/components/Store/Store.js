@@ -45,7 +45,7 @@ const StoreBody = styled.div`
 const Banner = styled.img`
     width: 90%;
     max-width: 1120px;
-    margin-top: 50px;
+    margin-top: 80px;
 `;
 
 const ProductsGrid = styled.div`

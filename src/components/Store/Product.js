@@ -5,8 +5,7 @@ import Modal from './Modal.js';
 
 export default function Product({ productId, name, value, image }) {
     const [modal, setModal] = useState(false);
-    //setModal(true) //teste
-    //to add cart -> userId, productId, quantity
+    
     return (
         <Card>
             <img src={image} alt="product" />
@@ -34,9 +33,12 @@ const Card = styled.div`
     width: 150px;
     height: 200px;
     margin-bottom: 10px;
-    margin-right: 40px;
+    margin-left: 40px;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    :first-child {
+        margin-left: 0;
+    }
     img {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -57,7 +59,7 @@ const Bar = styled.div`
 `;
 
 const Info = styled.div`
-    padding: 2px 0 2px 3px;
+    padding: 2px 0 4px 3px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
