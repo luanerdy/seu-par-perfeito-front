@@ -44,13 +44,21 @@ export default function Modal({ setModal, product }) {
                 <Info>
                    <span>Quantidade:</span>
                    <div>
-                       <button disabled={wait} onClick={() => setQuantity(quantity - 1)} className="btn">-</button>
-                       {quantity}
-                       <button disabled={wait} onClick={() => setQuantity(quantity + 1)} className="btn">+</button>
+                       <button disabled={wait} onClick={() => {
+                                if (quantity > 1) {
+                                        setQuantity(quantity - 1)
+                                } else {
+                                        setModal(false)
+                                }
+                            }} className="btn">
+                           -
+                        </button>
+                        {quantity}
+                        <button disabled={wait} onClick={() => setQuantity(quantity + 1)} className="btn">+</button>
                     </div>
                 </Info>
                 <Info>
-                   <span>Total:</span><span>{(value*quantity/100).toString().replace('.',',')}</span>
+                   <span>Total:</span><span>R$ {(value*quantity/100).toString().replace('.',',')}</span>
                 </Info>
                 <Confirm wait={wait.toString()}>
                     <button disabled={wait} onClick={() => setModal(false)}>Cancelar</button>

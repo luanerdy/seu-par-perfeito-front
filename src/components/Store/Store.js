@@ -1,10 +1,9 @@
 import banner from '../../assets/images/banner-welcome.png';
-import logo from '../../assets/images/logo-icon.svg';
-import { IoPersonSharp, IoCartSharp } from 'react-icons/io5';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Product from './Product.js';
 import axios from 'axios';
+import Navbar from '../Navbar.js';
 
 export default function Store() {
     const [products, setProducts] = useState([]);
@@ -21,15 +20,7 @@ export default function Store() {
 
     return (
         <StoreBody>
-            <TopBar>
-                <div>
-                    <Logo src={logo} alt="logo"/>
-                    <MenuIcons>
-                        <IoPersonSharp className="icon" />
-                        <IoCartSharp className="icon" />
-                    </MenuIcons>
-                </div>
-            </TopBar>
+            <Navbar />
             <Banner src={banner} alt="banner"/>
             <ProductsGrid>
                 {products.map(product => {
@@ -50,41 +41,6 @@ const StoreBody = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 0 20px;
-`;
-
-const TopBar = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    box-shadow: 0 0 8px rgba(0,0,0,0.15);
-    >div {
-        height: 50px;
-        width: 90%;
-        max-width: 1120px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-`;
-
-const MenuIcons = styled.div`
-    display: flex;
-    align-items: center;
-    .icon {
-        font-size: 40px;
-        margin-left: 5px;
-        color: #432D71;
-    }
-`;
-
-const Logo = styled.img`
-    width: 48px;
 `;
 
 const Banner = styled.img`

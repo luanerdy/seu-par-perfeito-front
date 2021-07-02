@@ -4,52 +4,46 @@ import { useState } from 'react';
 import Modal from './Modal.js';
 
 export default function Product({ productId, name, value, image }) {
-	const [modal, setModal] = useState(false);
-	//setModal(true) //teste
-	//to add cart -> userId, productId, quantity
-	return (
-		<Card>
-			<img src={image} alt="product" />
-			<Bar>
-				<Info>
-					<Name>{name}</Name>
-					<Value>
-						R$ {(value / 100).toFixed(2).replace('.', ',')}
-					</Value>
-				</Info>
-				<CartBtn onClick={() => setModal(true)}>
-					<TiShoppingCart className="cart" />
-				</CartBtn>
-			</Bar>
-			{modal ? (
-				<Modal
-					setModal={setModal}
-					product={{ productId, name, value }}
-				/>
-			) : (
-				''
-			)}
-		</Card>
-	);
-}
+    const [modal, setModal] = useState(false);
+    
+    return (
+        <Card>
+            <img src={image} alt="product" />
+            <Bar>
+                <Info>
+                    <Name>{name}</Name>
+                    <Value>R$ {(value/100).toFixed(2).replace('.',',')}</Value>
+                </Info>
+                <CartBtn onClick={() => setModal(true)}>
+                    <TiShoppingCart className="cart" />
+                </CartBtn>
+            </Bar>
+            {modal ? <Modal 
+                        setModal = {setModal} 
+                        product = {{ productId, name, value }} />
+            : ''}
+        </Card>
+    );
+};
 
 const Card = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 300px;
-	height: 400px;
-	margin-bottom: 20px;
-	border-radius: 10px;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-	img {
-		border-top-left-radius: 10px;
-		border-top-right-radius: 10px;
-		box-shadow: 0 1px rgba(0, 0, 0, 0.3);
-		height: 300px;
-		width: 100%;
-		object-fit: cover;
-	}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 400px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+
+    img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        box-shadow: 0 1px rgba(0,0,0,0.3);
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+    }
 `;
 
 const Bar = styled.div`
@@ -62,10 +56,10 @@ const Bar = styled.div`
 `;
 
 const Info = styled.div`
-	padding: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+    padding: 2px 0 4px 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `;
 
 const Name = styled.div`
