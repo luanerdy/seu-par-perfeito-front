@@ -30,7 +30,7 @@ const LogInPage = () => {
 			.post(`${process.env.REACT_APP_HOST}/auth/login`, user)
 			.then((res) => {
 				setUser(res.data);
-				history.push("/store");
+				history.push("/");
 			})
 			.catch((err) => {
 				alert('Erro! Tente novamente!');

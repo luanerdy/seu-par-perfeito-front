@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import { TiShoppingCart } from 'react-icons/ti';
+import { useState } from 'react';
+import Modal from './Modal.js';
 
-export default function Product({ name, value, description, image }) {
+export default function Product({ productId, name, value, image }) {
+    const [modal, setModal] = useState(false);
+    //setModal(true) //teste
+    //to add cart -> userId, productId, quantity
     return (
         <Card>
             <img src={image} alt="product" />
@@ -10,10 +15,14 @@ export default function Product({ name, value, description, image }) {
                     <Name>{name}</Name>
                     <Value>R$ {(value/100).toFixed(2).replace('.',',')}</Value>
                 </Info>
-                <CartBtn>
+                <CartBtn onClick={() => setModal(true)}>
                     <TiShoppingCart className="cart" />
                 </CartBtn>
             </Bar>
+            {modal ? <Modal 
+                        setModal = {setModal} 
+                        product = {{ productId, name, value }} />
+            : ''}
         </Card>
     );
 };
@@ -25,6 +34,7 @@ const Card = styled.div`
     width: 150px;
     height: 200px;
     margin-bottom: 10px;
+    margin-right: 40px;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0,0,0,0.3);
     img {
@@ -69,6 +79,7 @@ const CartBtn = styled.button`
     width: 45px;
     height: 100%;
     border-bottom-right-radius: 10px;
+    cursor: pointer;
     .cart {
         color: #fff;
         font-size: 25px;
