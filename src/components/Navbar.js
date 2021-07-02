@@ -29,6 +29,7 @@ const TopBar = styled.div`
     >div {
         height: 50px;
         width: 90%;
+        max-width: 1120px;
         display: flex;
         align-items: center;
         justify-content: space-between;
