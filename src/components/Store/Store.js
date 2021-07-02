@@ -1,4 +1,4 @@
-import banner from '../../assets/images/banner-welcome.svg';
+import banner from '../../assets/images/banner-welcome.png';
 import logo from '../../assets/images/logo-icon.svg';
 import { IoPersonSharp, IoCartSharp } from 'react-icons/io5';
 import styled from 'styled-components';
@@ -49,6 +49,7 @@ const StoreBody = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 20px;
 `;
 
 const TopBar = styled.div`
@@ -56,11 +57,12 @@ const TopBar = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 50px;
+    height: 80px;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #fff;
-    box-shadow: 0 1px rgba(0,0,0,0.1);
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
     >div {
         height: 50px;
         width: 90%;
@@ -75,26 +77,34 @@ const MenuIcons = styled.div`
     display: flex;
     align-items: center;
     .icon {
-        font-size: 25px;
+        font-size: 40px;
         margin-left: 5px;
         color: #432D71;
     }
 `;
 
 const Logo = styled.img`
-    width: 30px;
+    width: 48px;
 `;
 
 const Banner = styled.img`
-    width: 90%;
+    width: 100%;
     max-width: 1120px;
-    margin-top: 50px;
+    margin-top: 80px;
 `;
 
 const ProductsGrid = styled.div`
-    width: 90%;
+    width: 100%;
+    margin: 20px 20px;
     max-width: 1120px;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    *:nth-child(3n) {
+        justify-self: end;
+    }
+
+    *:nth-child(3n - 1) {
+        justify-self: center;
+    }
 `;
