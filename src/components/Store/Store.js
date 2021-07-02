@@ -8,7 +8,7 @@ import axios from 'axios';
 
 export default function Store() {
     const [products, setProducts] = useState([]);
-
+    
     useEffect(() => {
         const request = axios.get(`${process.env.REACT_APP_HOST}/products`);
         request.then(r => {
@@ -16,7 +16,7 @@ export default function Store() {
         });
         request.catch(() => {
             alert('algo deu errado.');
-        })
+        });
     }, []);
 
     return (
@@ -32,13 +32,13 @@ export default function Store() {
             </TopBar>
             <Banner src={banner} alt="banner"/>
             <ProductsGrid>
-                {products.map(item => {
+                {products.map(product => {
                     return <Product
-                                key = {item.id}
-                                name = {item.name} 
-                                value = {item.value} 
-                                description = {item.description} 
-                                image = {item.image}/>
+                                key = {product.id}
+                                productId = {product.id}
+                                name = {product.name} 
+                                value = {product.value}
+                                image = {product.image}/>
                 })}
             </ProductsGrid>
         </StoreBody>
@@ -64,6 +64,7 @@ const TopBar = styled.div`
     >div {
         height: 50px;
         width: 90%;
+        max-width: 1120px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -86,13 +87,14 @@ const Logo = styled.img`
 
 const Banner = styled.img`
     width: 90%;
+    max-width: 1120px;
     margin-top: 50px;
 `;
 
 const ProductsGrid = styled.div`
     width: 90%;
+    max-width: 1120px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     margin-top: 10px;
 `;
