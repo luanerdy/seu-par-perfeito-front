@@ -7,23 +7,24 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Navbar() {
-    const { user, setUser } = useContext(UserContext);
     const history = useHistory();
+    const { user, setUser } = useContext(UserContext);
+    const { name, token } = user;
 
     function logout() {
         const config = {
             headers: {
-                Authorization: `Bearer ${user.token}`
+                Authorization: `Bearer ${token}`
             }
-        }
-        axios.post(`${process.env.REACT_APP_HOST}/auth/logout`, [], config)
-        .then(res => {
-            history.push('/');
-            setUser(undefined);
-            alert('Deslogado com sucesso!');
-        }).catch(err => {
-            alert('Algo deu errado! Tente novamente!');
+        };
+        const request = axios.post(`${process.env.REACT_APP_HOST}/auth/logout`, {}, config);
+        request.then(() => {
+            history.push("/");
+            setUser({ name: '', userId: '', token: '' });
         });
+        request.catch(() => {
+            alert("algo deu errado");
+        })
     }
 
     return (

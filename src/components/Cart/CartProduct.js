@@ -1,24 +1,41 @@
 import styled from 'styled-components';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useState } from 'react';
+import axios from 'axios';
+import { UserContext } from '../../contexts/UserContext';
+import { useContext } from 'react';
 
 export default function CartProduct({ product }) {
     const { id, name, value, description, image, quantity } = product;
     const [newQuantity, setNewQuantity] = useState(quantity);
-    
+    const { user } = useContext(UserContext);
+    const { userId, token } = user;
     //onClick trash -> delete product from product_cart
     function deleteProduct() {
         alert('deletar produto a ser implementado')
     }
-    //onClick qtd -> update product form product_cart
-    function updateProduct() {
-        alert('update de produto a ser implementado')
+    
+    function updateProduct(quantity) {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+        const body = {
+            userId,
+            productId: id,
+            quantity
+        }
+        const request = axios.put(`${process.env.REACT_APP_HOST}/cart`, body, config);
+        request.catch(() => {
+            alert('algo deu errado');
+        })
     }
 
     function subtract() {
         if (newQuantity > 1) {
             setNewQuantity(newQuantity - 1);
-            //update into product_cart
+            updateProduct(newQuantity - 1);
         } else {
             deleteProduct();
         }
@@ -26,7 +43,7 @@ export default function CartProduct({ product }) {
 
     function add() {
         setNewQuantity(newQuantity + 1);
-        //update into product_cart
+        updateProduct(newQuantity + 1);
     }
 
     return (
@@ -111,10 +128,3 @@ const Qtd = styled.div`
         }
     }
 `;
-
-/*
-.color-primary-1 { color: #AFA3C8 }
-.color-primary-2 { color: #8271A7 }
-.color-primary-3 { color: #432D71 }
-.color-primary-4 { color: #281453 }
-*/
