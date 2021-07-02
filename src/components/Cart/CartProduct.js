@@ -4,16 +4,45 @@ import { useState } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../contexts/UserContext';
 import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
-export default function CartProduct({ product }) {
-	const { id, name, value, description, image, quantity } = product;
-	const [newQuantity, setNewQuantity] = useState(quantity);
-	const { user } = useContext(UserContext);
-	const { userId, token } = user;
-	//onClick trash -> delete product from product_cart
-	function deleteProduct() {
-		alert('deletar produto a ser implementado');
-	}
+export default function CartProduct({ product, reload, setReload }) {
+    const { id, name, value, description, image, quantity } = product;
+    const [newQuantity, setNewQuantity] = useState(quantity);
+    const { user } = useContext(UserContext);
+    const { userId, token } = user;
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+
+    function deleteProduct() {
+        const body = {
+            userId,
+            productId: id
+        }
+        const request = axios.post(`${process.env.REACT_APP_HOST}/cart/product`, body, config);
+        request.then(() => {
+            setReload(!reload);
+        })
+        request.catch(() => {
+            alert('algo deu errado');
+        });
+    }
+    
+    function updateProduct(quantity) {
+        const body = {
+            userId,
+            productId: id,
+            quantity
+        };
+        const request = axios.put(`${process.env.REACT_APP_HOST}/cart`, body, config);
+        request.catch(() => {
+            alert('algo deu errado');
+        });
+    }
 
 	function updateProduct(quantity) {
 		const config = {
