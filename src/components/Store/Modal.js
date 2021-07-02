@@ -12,12 +12,18 @@ export default function Modal({ setModal, product }) {
     
     function PostProduct() {
         setWait(true);
+        if (token === '') {
+            alert('Você precisa logar para ter acesso ao carrinho');
+            setModal(false);
+            setQuantity(1);
+            setWait(false);
+            return
+        }
         const body = {
             userId,
             productId,
             quantity
         };
-        console.log(body);
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`
