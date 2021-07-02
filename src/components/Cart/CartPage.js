@@ -9,8 +9,9 @@ import CartProduct from './CartProduct';
 export default function CartPage() {
     const { user } = useContext(UserContext);
     const history = useHistory();
-    const [cart, setCart] = useState();
+    const [cart, setCart] = useState([]);
     const { userId, token } = user;
+    const [reload, setReload] = useState(false);
 
     if (token === '') history.push("/login");
 
@@ -28,11 +29,19 @@ export default function CartPage() {
         request.catch(() => {
             alert('algo deu errado.');
         });
-    }, []);
+    }, [reload]);
 
-    //onClick esvaziar carrinho -> delete * from product_cart
     function emptyCart() {
-        alert('esvaziar carrinho a ser implementado');
+        const body = {
+            userId
+        }
+        const request = axios.post(`${process.env.REACT_APP_HOST}/cart/all`, body, config);
+        request.then(() => {
+            setReload(!reload);
+        })
+        request.catch(() => {
+            alert('algo deu errado');
+        });
     }
 
     function checkout() {
@@ -45,7 +54,7 @@ export default function CartPage() {
             <Body>
                 <Title><p>Este é seu carrinho de compras!</p></Title>
                 <Cart>
-                    {cart ? cart.map(e => <CartProduct product={e} />) : ''}
+                    {cart.length !== 0 ? cart.map(e => <CartProduct product={e} reload={reload} setReload={setReload} />) : <Call>Está esperando o quê para encontrar seu par perfeito?!</Call>}
                 </Cart>
                 <Confirm>
                     <button className="empty" onClick = {emptyCart}>Esvaziar carrinho</button>
@@ -106,4 +115,11 @@ const Confirm = styled.div`
     .checkout {
         background-color: #00CC33;
     }
+`;
+
+const Call = styled.p`
+    margin: 25px 0;
+    font-size: 20px;
+    font-family: 'Berkshire Swash', cursive;
+    color: #432D71;
 `;

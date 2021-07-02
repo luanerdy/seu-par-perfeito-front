@@ -17,7 +17,6 @@ export default function Modal({ setModal, product }) {
             productId,
             quantity
         };
-        console.log(body);
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`

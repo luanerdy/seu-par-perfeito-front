@@ -28,7 +28,6 @@ export default function Admin() {
             alert('produto inserido com sucesso');
         });
         request.catch(r => {
-            console.log(r);
             alert('algo deu errado');
             setWait(false);
         })
