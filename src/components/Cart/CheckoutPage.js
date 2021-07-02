@@ -37,6 +37,23 @@ export default function CartPage() {
         history.push('/cart');
     }
 
+	function handleFinalize(event) {
+		event.preventDefault();
+		
+		const request = axios.post(
+			`${process.env.REACT_APP_HOST}/checkout`,
+			{userId}
+		);
+		request.then((r) => {
+			alert('Compra finalizada');
+			history.push('/');
+			setCart([]);
+		});
+		request.catch(() => {
+			alert('algo deu errado.');
+		});
+	}
+
 	return (
 		<>
 			<Navbar />
@@ -45,7 +62,7 @@ export default function CartPage() {
 					<p>Finalize sua compra!</p>
 				</Title>
 				<Cart>
-					{cart ? cart.map((e) => <CheckoutProduct product={e} />) : ''}
+					{cart ? cart.map((e) => <CheckoutProduct product={e} />) : null}
 				</Cart>
 				<Confirm>
 					<div className="total-price">
@@ -64,7 +81,7 @@ export default function CartPage() {
 					</p>
                     <button className="goback" onClick={gocart}>Voltar ao carrinho</button>
 					</div>
-					<button className="checkout">Finalizar compra</button>
+					<button className="checkout" onClick={handleFinalize}>Finalizar compra</button>
 				</Confirm>
 			</Body>
 		</>

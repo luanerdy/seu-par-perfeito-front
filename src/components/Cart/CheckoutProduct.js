@@ -27,7 +27,7 @@ const Box = styled.div`
 	padding: 20px;
 	border-radius: 10px;
 	margin-bottom: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
